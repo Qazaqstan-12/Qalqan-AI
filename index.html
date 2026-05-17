@@ -11,13 +11,16 @@
     <link rel="manifest" href="data:application/manifest+json,{'name':'Qalqan AI','short_name':'Qalqan','start_url':'.','display':'standalone','background_color':'#f8fafc','theme_color':'#075985'}">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Соңғы қолжетімді Font Awesome 6.4.2 нұсқасы (кісен және басқа да белгілер үшін) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+        /* Шрифт толықтай Times New Roman болып белгіленді */
+        body, input, button, span, h1, h2, h3, p, div, a {
+            font-family: 'Times New Roman', Times, serif !important;
+        }
         
         body {
-            font-family: 'Inter', sans-serif;
             background-color: #f1f5f9;
             -webkit-tap-highlight-color: transparent;
         }
@@ -61,15 +64,16 @@
 
     <div class="app-container flex flex-col">
         
+        <!-- Жоғарғы дерек тақтасы -->
         <header class="blue-gradient text-white pt-12 pb-8 px-6 rounded-b-[40px] shadow-lg">
             <div class="flex justify-between items-center mb-4">
                 <i class="fas fa-shield-halved text-3xl"></i>
-                <span id="lawCount" class="text-[10px] font-bold bg-white/20 px-2 py-1 rounded">ЖҮКТЕЛУДЕ...</span>
             </div>
             <h1 class="text-3xl font-black tracking-tight">QALQAN AI</h1>
             <p class="text-sky-100 text-sm opacity-90">ҚР Заңнамалық анықтамалығы</p>
         </header>
 
+        <!-- Іздеу жолағы контейнері -->
         <div class="search-container p-6 -mt-8">
             <div class="relative flex items-center shadow-xl rounded-2xl overflow-hidden">
                 <input type="text" id="lawSearch" placeholder="Бап нөмірін немесе атауын жазыңыз..." 
@@ -78,10 +82,11 @@
             </div>
         </div>
 
+        <!-- Нәтижелер көрсетілетін аймақ -->
         <div id="resultArea" class="px-6 py-2 space-y-4 flex-1">
             <div id="placeholder" class="text-center py-20 opacity-30">
                 <i class="fas fa-gavel text-6xl mb-4"></i>
-                <p class="font-bold">Мәліметтер базасы дайын</p>
+                <p class="font-bold text-lg">Мәліметтер базасы дайын</p>
                 <p class="text-xs uppercase mt-2 tracking-widest">Бап нөмірін немесе сөз енгізіңіз</p>
             </div>
 
@@ -95,10 +100,49 @@
             </div>
         </div>
 
-        <nav class="bg-white border-t border-slate-100 p-4 grid grid-cols-3 gap-2 sticky bottom-0">
-            <button onclick="quickAction('Қылмыстық')" class="flex flex-col items-center p-2 text-slate-400 hover:text-red-600 transition">
-                <i class="fas fa-handcuffs text-xl mb-1"></i>
-                <span class="text-[10px] font-bold uppercase">ҚК</span>
+        <!-- Төртінші "EQ" терезесі (Сілтемелер жинағы) -->
+        <div id="eqContainer" class="hidden px-6 py-6 space-y-4 flex-1 animate-slide-up">
+            <div class="bg-white rounded-[32px] p-6 shadow-sm border border-slate-100 text-center">
+                <i class="fa-solid fa-earth-asia text-5xl text-sky-600 mb-4"></i>
+                <h3 class="text-2xl font-black text-slate-800 mb-2">Мемлекеттік ресурстар</h3>
+                <p class="text-sm text-slate-500 mb-6">Қазақстан Республикасының ресми құқықтық порталдары</p>
+                
+                <div class="space-y-4">
+                    <!-- E-Otinish Сілтемесі -->
+                    <a href="https://eotinish.kz/kk?ref=blog.eventrocks.ru" target="_blank" rel="noopener noreferrer" 
+                       class="flex items-center justify-between p-4 bg-sky-50 hover:bg-sky-100 border border-sky-100 rounded-2xl transition group duration-200">
+                        <div class="flex items-center space-x-3 text-left">
+                            <span class="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center font-bold text-lg">E</span>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-base">E-Otinish</h4>
+                                <p class="text-xs text-slate-500">Өтініштер қабылдау порталы</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right text-sky-600 group-hover:translate-x-1 transition"></i>
+                    </a>
+
+                    <!-- Adilet.zan Сілтемесі -->
+                    <a href="https://adilet.zan.kz/kaz/" target="_blank" rel="noopener noreferrer" 
+                       class="flex items-center justify-between p-4 bg-emerald-50 hover:bg-emerald-100 border border-emerald-100 rounded-2xl transition group duration-200">
+                        <div class="flex items-center space-x-3 text-left">
+                            <span class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-lg">A</span>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-base">Adilet.zan</h4>
+                                <p class="text-xs text-slate-500">Нормативтік құқықтық актілер</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right text-emerald-600 group-hover:translate-x-1 transition"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Төменгі навигация (Қазір 4 батырмадан тұрады: grid-cols-4) -->
+        <nav class="bg-white border-t border-slate-100 p-4 grid grid-cols-4 gap-2 sticky bottom-0">
+            <!-- ҚК батырмасы: сұр түсте, үстінде кісен белгісімен (fa-handcuffs), үлкейтілген (scale-125) күйде -->
+            <button onclick="quickAction('Қылмыстық')" class="flex flex-col items-center p-2 text-slate-600 hover:text-slate-800 transition transform scale-125 origin-center font-bold">
+                <i class="fa-solid fa-handcuffs text-2xl mb-1"></i>
+                <span class="text-xs font-bold uppercase">ҚК</span>
             </button>
             <button onclick="quickAction('Әкімшілік')" class="flex flex-col items-center p-2 text-slate-400 hover:text-amber-600 transition">
                 <i class="fas fa-balance-scale text-xl mb-1"></i>
@@ -107,6 +151,11 @@
             <button onclick="quickAction('Азаматтық')" class="flex flex-col items-center p-2 text-slate-400 hover:text-sky-600 transition">
                 <i class="fas fa-users text-xl mb-1"></i>
                 <span class="text-[10px] font-bold uppercase">АК</span>
+            </button>
+            <!-- EQ батырмасы (Жаңа терезе) -->
+            <button onclick="switchTab('eq')" id="nav-eq" class="flex flex-col items-center p-2 text-slate-400 hover:text-sky-600 transition">
+                <i class="fa-solid fa-globe text-xl mb-1"></i>
+                <span class="text-[10px] font-bold uppercase">EQ</span>
             </button>
         </nav>
 
@@ -129,13 +178,13 @@
             "149": { type: "Қылмыстық", title: "149-бап. Тұрғын үйге қолсұғылмаушылықты бұзу", content: "Үйге иесінің келісімінсіз заңсыз кіру." },
             "174": { type: "Қылмыстық", title: "174-бап. Әлеуметтік, ұлттық немесе діни араздықты қоздыру", content: "Алауыздық тудыратын әрекеттер немесе сөздер." },
             "188-kk": { type: "Қылмыстық", title: "188-бап. Ұрлық", content: "Бөтеннің мүлкін жасырын түрде жымқыру." },
-            "190": { type: "Қылмыстық", title: "190-бап. Алаяқтық", content: "Алдау немесе сенімді теріс пайдалану арқылы бөтеннің мүлкін иемдену." },
+            "190": { type: "Қылмыстық", title: "190-бап. Алаяқтық", content: "Алдау немесе сенімді теріс пайдалану арқылы бөтеннің мүлкін іемдену." },
             "191": { type: "Қылмыстық", title: "191-бап. Тонау", content: "Бөтеннің мүлкін ашықтан-ашық (көз алдында) жымқыру." },
             "192": { type: "Қылмыстық", title: "192-бап. Қарақшылық", content: "Бөтеннің мүлкін иемдену мақсатында өмірге немесе денсаулыққа қауіпті күш қолданып шабуыл жасау." },
             "194": { type: "Қылмыстық", title: "194-бап. Қорқытып алушылық", content: "Бөтеннің мүлкін немесе құқығын күш қолдану қатерімен талап ету." },
             "195": { type: "Қылмыстық", title: "195-бап. Алдау жолымен мүліктік залал келтіру", content: "Ұрлық белгілерінсіз мүлікке зиян келтіру." },
             "197": { type: "Қылмыстық", title: "197-бап. Мұнайдың заңсыз айналымы", content: "Мұнай өнімдерін құжатсыз тасымалдау немесе сақтау." },
-            "200-kk": { type: "Қылмыстық", title: "200-бап. Автомобильдi жымқыру мақсатынсыз заңсыз иемдену", content: "Көлікті ұрлау ниетінсіз, тек «айдап кету» (угон) әрекеті." },
+            "200-kk": { type: "Қылмыстық", title: "200-бап. Автомобильдi жымқыру мақсатынсыз заңсыз иемдену", content: "Көлікті ұрлау ниетінсіз, тек «айдап कету» (угон) әрекеті." },
             "201": { type: "Қылмыстық", title: "201-бап. Жеке өмірге қолсұғылмаушылықты бұзу", content: "Жеке өмір туралы мәліметтерді оның келісімінсіз заңсыз жинау немесе тарату." },
             "204-kk": { type: "Қылмыстық", title: "204-бап. Бөтеннің мүлкін абайсызда жою", content: "Отпен немесе басқа қауіпті құралмен абайсызда зиян келтіру." },
             "216": { type: "Қылмыстық", title: "216-бап. Қолдан жасалған шот-фактураларды жазып беру", content: "Нақты жұмыс атқарылмай жасалған жалған құжаттар." },
@@ -163,7 +212,7 @@
             "73-1": { type: "Әкімшілік", title: "73-1-бап. Денсаулыққа қасақана жеңіл зиян келтіру", content: "Ұрып-соғу, бірақ денсаулыққа қатты зиян келмеген жағдай." },
             "73-2": { type: "Әкімшілік", title: "73-2-бап. Ұрып-соғу", content: "Денсаулыққа зақым келтірмей күш қолдану." },
             "73-3": { type: "Әкімшілік", title: "73-3-бап. Жала жабу", content: "Басқа адамның ар-намысына нұқсан келтіретін көрінеу жалған мәліметтер тарату." },
-            "127": { type: "Әкімшілік", title: "127-бап. Бала тәрбиелеу міндетін орындамау", content: "Ата-ананың баланың білімі мен қауіпсіздігіне қарауы." },
+            "127": { type: "Әкімшілік", title: "127-бап. Bala тәрбиелеу міндетін орындамау", content: "Ата-ананың баланың білімі мен қауіпсіздігіне қарауы." },
             "132": { type: "Әкімшілік", title: "132-бап. Кәмелетке толмағандардың көңіл көтеру орындарында болуы", content: "Кафе-бар иелерінің түнгі уақытта жасөспірімдердің болуына жол беруі." },
             "147-1": { type: "Әкімшілік", title: "147-1-бап. Бөтеннің мүлкін қасақана жою немесе бүлдіру", content: "Аз мөлшердегі материалдық зиян келтіру." },
             "200-adm": { type: "Әкімшілік", title: "200-бап. Алкогольді сату талаптарын бұзу", content: "Уақытынан тыс немесе жастарға ішімдік сату." },
@@ -224,7 +273,7 @@
             "292": { type: "Азаматтық", title: "292-бап. Міндеттемені қамтамасыз ету", content: "Айыппұл, кепіл немесе кепілдік." },
             "293": { type: "Азаматтық", title: "293-бап. Тұрақсыздық айыбы (неустойка)", content: "Кешіктірілген әр күн үшін төленетін айыппұл." },
             "299": { type: "Азаматтық", title: "299-бап. Кепіл ұғымы", content: "Қарыз қайтпаған жағдайда мүлікті (мысалы, пәтерді) кепілге қою." },
-            "329": { type: "Азаматтық", title: "329-бап. Кепілдік", content: "Басқа адамның қарызы үшін үшінші тұлғаның жауап беруі." },
+            "329": { type: "Азаматтық", title: "329-бап. Кепілдік", content: "Басқа адамның қарызы үшін үшінші тұлғаның жауап береді." },
             "350": { type: "Азаматтық", title: "350-бап. Залалдарды өтеу", content: "Келісімшартты бұзған тараптың шығынды қайтаруы." },
             "378-ak": { type: "Азаматтық", title: "378-бап. Шарт туралы ұғым", content: "Екі жақтың құқықтар мен міндеттерді бекітуі." },
             "382": { type: "Азаматтық", title: "382-бап. Шарттың талаптары", content: "Келісімшарт талаптарының заңға сәйкестігі." },
@@ -253,11 +302,12 @@
 
         const searchInput = document.getElementById('lawSearch');
         const resultArea = document.getElementById('lawResult');
+        const outerResultArea = document.getElementById('resultArea');
         const placeholder = document.getElementById('placeholder');
         const noResult = document.getElementById('noResult');
-        const countBadge = document.getElementById('lawCount');
+        const eqContainer = document.getElementById('eqContainer');
 
-        countBadge.innerText = Object.keys(lawDatabase).length + " БАП ЖҮКТЕЛДІ";
+        let currentTab = 'search';
 
         function displayLaw(law) {
             let badgeClass = "bg-sky-600";
@@ -276,6 +326,7 @@
         }
 
         function performSearch() {
+            if (currentTab === 'eq') return;
             const query = searchInput.value.toLowerCase().trim();
             
             if (query === "") {
@@ -309,8 +360,36 @@
         }
 
         function quickAction(type) {
+            // Кез келген кодекс батырмасын басқанда автоматты түрде іздеу терезесіне ауысады
+            switchTab('search');
             searchInput.value = type;
             performSearch();
+        }
+
+        function switchTab(tab) {
+            const searchContainer = document.querySelector('.search-container');
+            const eqButton = document.getElementById('nav-eq');
+            currentTab = tab;
+
+            if (tab === 'eq') {
+                // EQ терезесін ашу
+                searchContainer.classList.add('hidden');
+                outerResultArea.classList.add('hidden');
+                eqContainer.classList.remove('hidden');
+                
+                // Белсенді батырманың стилін өзгерту
+                eqButton.classList.add('text-sky-600');
+                eqButton.classList.remove('text-slate-400');
+            } else {
+                // Іздеу терезесіне қайту
+                searchContainer.classList.remove('hidden');
+                outerResultArea.classList.remove('hidden');
+                eqContainer.classList.add('hidden');
+                
+                // Белсенді батырма стилін қалпына келтіру
+                eqButton.classList.add('text-slate-400');
+                eqButton.classList.remove('text-sky-600');
+            }
         }
 
         searchInput.addEventListener('input', performSearch);
